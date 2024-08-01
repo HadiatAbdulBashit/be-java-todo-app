@@ -42,18 +42,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         jwt = authHeader.substring(7);
         try {
-            System.out.println("hehehehehheheheheheeheheheehehehehehehehehehhehehehhe");
             userEmail = jwtService.extractUsername(jwt);
             if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-                System.out.println("12hehehehehheheheheheeheheheehehehehehehehehehhehehehhe");
-                System.out.println(jwt);
-                System.out.println("12hehehehehheheheheheeheheheehehehehehehehehehhehehehhe");
                 var isTokenValid = tokenRepository.findByToken(jwt)
                         .map(t -> !t.isExpired() && !t.isRevoked())
                         .orElse(false);
-                System.out.println(isTokenValid);
-                System.out.println("14hehehehehheheheheheeheheheehehehehehehehehehhehehehhe");
                 if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userDetails,

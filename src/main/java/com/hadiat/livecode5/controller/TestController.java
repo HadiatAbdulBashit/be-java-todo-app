@@ -1,7 +1,5 @@
 package com.hadiat.livecode5.controller;
 
-import com.hadiat.livecode5.utils.dto.AuthenticationRequestDTO;
-import com.hadiat.livecode5.utils.dto.AuthenticationResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,8 @@
 package com.hadiat.livecode5.service;
 
 import com.hadiat.livecode5.model.User;
-import com.hadiat.livecode5.utils.dto.AuthenticationRequestDTO;
-import com.hadiat.livecode5.utils.dto.AuthenticationResponseDTO;
-import com.hadiat.livecode5.utils.dto.RegisterRequestDTO;
-import com.hadiat.livecode5.utils.dto.RegisterResponseDTO;
+import com.hadiat.livecode5.model.enums.TokenType;
+import com.hadiat.livecode5.utils.dto.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -16,9 +14,9 @@ public interface AuthenticationService {
 
     public AuthenticationResponseDTO authenticate(AuthenticationRequestDTO request);
 
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException;
+    public RefreshTokenResponseDTO refreshToken(RefreshTokenRequestDTO request);
 
     public User getUserAuthenticated();
 
-    void saveUserToken(User user, String jwtToken);
+    void saveUserToken(User user, String jwtToken, TokenType tokenType);
 }

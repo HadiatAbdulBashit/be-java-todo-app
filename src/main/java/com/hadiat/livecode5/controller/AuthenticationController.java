@@ -1,10 +1,7 @@
 package com.hadiat.livecode5.controller;
 
 import com.hadiat.livecode5.service.AuthenticationService;
-import com.hadiat.livecode5.utils.dto.AuthenticationRequestDTO;
-import com.hadiat.livecode5.utils.dto.AuthenticationResponseDTO;
-import com.hadiat.livecode5.utils.dto.RegisterRequestDTO;
-import com.hadiat.livecode5.utils.dto.RegisterResponseDTO;
+import com.hadiat.livecode5.utils.dto.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +29,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/refresh")
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        authenticationService.refreshToken(request, response);
+    public ResponseEntity<RefreshTokenResponseDTO> refreshToken(@RequestBody RefreshTokenRequestDTO request) {
+        return new ResponseEntity<>(authenticationService.refreshToken(request), HttpStatus.OK);
     }
 
 }

@@ -17,8 +17,8 @@ import javax.naming.AuthenticationException;
 import java.util.ArrayList;
 import java.util.List;
 
-//@ControllerAdvice
-//@CrossOrigin
+@ControllerAdvice
+@CrossOrigin
 public class ErrorController {
 
     /*
