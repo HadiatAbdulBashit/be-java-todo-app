@@ -24,6 +24,8 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
+    private final AdminSecretKeyFilter adminSecretKeyFilter;
+    private final SuperAdminSecretKeyFilter superAdminSecretKeyFilter;
 
     @Autowired
     private CustomAccessDeniedException accessDeniedException;
@@ -35,10 +37,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/todo/**").hasAuthority(Role.USER.name())
-                .requestMatchers("/api/admin/**").hasAuthority(Role.ADMIN.name())
-                .requestMatchers("/api/**").permitAll()
+                .requestMatchers("/api/auth/**", "/api/admin/super-admin", "/api/admin").permitAll()
+                .requestMatchers("/api/todos/**").hasAuthority(Role.USER.name())
+                .requestMatchers("/api/admin/**", "/api/todos/**").hasAuthority(Role.ADMIN.name())
+                .requestMatchers("/api/admin/users/*/role", "/api/admin/**", "/api/todos/**").hasAuthority(Role.SUPER_ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -51,6 +53,8 @@ public class SecurityConfiguration {
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(adminSecretKeyFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(superAdminSecretKeyFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout()
                     .logoutUrl("/api/auth/logout")
                     .addLogoutHandler(logoutHandler)

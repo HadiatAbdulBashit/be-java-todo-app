@@ -2,6 +2,7 @@ package com.hadiat.livecode5.utils.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.hadiat.livecode5.model.enums.EStatus;
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +19,6 @@ public class ToDoRequestDTO {
     private String description;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
+    @Nullable
     private EStatus status;
 }

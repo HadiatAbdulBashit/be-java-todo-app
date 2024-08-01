@@ -10,15 +10,11 @@ import com.hadiat.livecode5.utils.dto.ToDoRequestDTO;
 import com.hadiat.livecode5.utils.dto.ToDoStatusRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 @RequiredArgsConstructor
@@ -62,7 +58,7 @@ public class ToDoServiceImpl implements ToDoService {
         ToDo selectedToDo = findById(id);
         if (!updatedToDo.getTitle().isEmpty()) selectedToDo.setTitle(updatedToDo.getTitle());
         if (!updatedToDo.getDescription().isEmpty()) selectedToDo.setDescription(updatedToDo.getDescription());
-        if (updatedToDo.getStatus().describeConstable().isPresent()) selectedToDo.setStatus(updatedToDo.getStatus());
+        if (updatedToDo.getStatus() != null) selectedToDo.setStatus(updatedToDo.getStatus());
         if (updatedToDo.getDueDate().isAfter(LocalDate.of(2020, 1,1))) selectedToDo.setDueDate(updatedToDo.getDueDate());
         return toDoRepository.save(selectedToDo);
     }
