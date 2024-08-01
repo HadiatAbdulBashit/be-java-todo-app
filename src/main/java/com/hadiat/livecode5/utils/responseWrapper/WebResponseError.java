@@ -1,7 +1,6 @@
 package com.hadiat.livecode5.utils.responseWrapper;
 
 import lombok.*;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -12,6 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 public class WebResponseError<T> {
     private String message;
-    private HttpStatus status;
     private List<T> errors;
 }

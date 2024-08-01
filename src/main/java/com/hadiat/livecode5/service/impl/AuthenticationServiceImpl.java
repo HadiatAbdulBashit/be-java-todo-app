@@ -1,6 +1,5 @@
 package com.hadiat.livecode5.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hadiat.livecode5.config.JwtService;
 import com.hadiat.livecode5.model.enums.Role;
 import com.hadiat.livecode5.model.Token;
@@ -13,7 +12,6 @@ import com.hadiat.livecode5.utils.dto.*;
 import com.hadiat.livecode5.utils.exception.NotFoundException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,10 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -45,7 +40,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.ROLE_USER)
+                .role(Role.USER)
                 .build();
         var savedUser = repository.save(user);
         return RegisterResponseDTO.builder()

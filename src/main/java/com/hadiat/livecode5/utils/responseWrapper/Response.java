@@ -26,7 +26,6 @@ public class Response {
     public static <T> ResponseEntity<?> renderError(String message, HttpStatus httpStatus, List<T> errors) {
         WebResponseError<T> response = WebResponseError.<T>builder()
                 .message(message)
-                .status(httpStatus)
                 .errors(errors)
                 .build();
         return ResponseEntity.status(httpStatus).body(response);

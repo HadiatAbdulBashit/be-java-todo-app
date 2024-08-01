@@ -10,13 +10,13 @@ import java.util.List;
 @Setter
 public class PaginationResponse<T> {
     private List<T> items;
-    private Long size;
+    private Long totalItems;
     private Integer currentPage;
     private Integer totalPages;
 
     public PaginationResponse(Page<T> page) {
         this.items = page.getContent();
-        this.size = page.getTotalElements();
+        this.totalItems = page.getTotalElements();
         this.currentPage = page.getNumber();
         this.totalPages = page.getTotalPages();
     }
