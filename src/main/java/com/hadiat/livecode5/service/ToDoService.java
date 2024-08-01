@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 public interface ToDoService {
     ToDo create(ToDoRequestDTO newToDo);
     Page<ToDo> findAll(Pageable pageable);
-    Page<ToDo> findAllToDoByAuthUser(Pageable pageable);
     ToDo findById(Integer id);
     ToDo updateById(Integer id, ToDoRequestDTO updatedToDo);
     ToDo updateStatusById(Integer id, ToDoStatusRequestDTO toDoStatusRequestDTO);

@@ -59,12 +59,6 @@ public class ErrorController {
         if (e.getMessage().contains("rawPassword")) {
             errorMessage = "Password Field Cannot be Empty";
         }
-        if (e.getMessage().contains("\"first_name\"")) {
-            errorMessage = "FirstName Field Cannot be Empty";
-        }
-        if (e.getMessage().contains("\"last_name\"")) {
-            errorMessage = "LastName Field Cannot be Empty";
-        }
         if (e.getMessage().contains("\"users_email_key\"")){
             errorMessage = "Email Has Been Registered On Our System, Please Login Instead";
         }
